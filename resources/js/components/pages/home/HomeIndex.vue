@@ -149,7 +149,7 @@ export default {
         const filtersStore = useFiltersStore();
 
         useHead({
-            title: '女友送命題圖鑑 — 40 道地雷題與男友不死亡回答',
+            title: '女友送命題圖鑑 — 50 道地雷題與男友不死亡回答',
         });
 
         const dangerLevels = [

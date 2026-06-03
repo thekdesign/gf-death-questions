@@ -81,4 +81,15 @@ export const appearance = [
         survival: '哪有，妳跟我們剛認識的時候根本沒兩樣。',
         note: '秒答 + 對比「剛認識時」，把時間感反過來幫妳。',
     },
+    {
+        id: 41,
+        number: '41',
+        categoryKey: 'APPEARANCE',
+        question: '我這張自拍，是不是跟本人差很多？',
+        danger: 3,
+        roast: '說差很多＝本人見光死；說一模一樣＝那你是嫌我修圖技術差？',
+        badEnd: '嗯……照片是有修一點點啦。',
+        survival: '哪會，照片根本拍不出妳本人好看的十分之一。',
+        note: '把比較導向「本人 ＞ 照片」，怎麼修都比不上真人，穩贏。',
+    },
 ];
