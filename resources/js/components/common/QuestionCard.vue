@@ -26,11 +26,11 @@
         <div class="flex items-end gap-2.5 px-4 pt-3">
             <div class="relative shrink-0">
                 <Transition name="pop-heart">
-                    <span v-if="revealed" class="pointer-events-none absolute -right-1 -top-1 z-10 text-base">💗</span>
+                    <span v-if="result === 'correct'" class="pointer-events-none absolute -right-1 -top-1 z-10 text-base">💗</span>
                 </Transition>
                 <GirlfriendAvatar :danger="question.danger"
                                   :accent="category.accent"
-                                  :force-mood="revealed ? 'sweet' : ''"
+                                  :force-mood="avatarMood"
                                   :size="64" />
             </div>
 
@@ -55,52 +55,18 @@
             <span>{{ question.roast }}</span>
         </p>
 
-        <!-- 選項區（折疊）-->
+        <!-- 作答區：選一句你會怎麼回 -->
         <div class="mt-3 px-4 pb-4">
-            <button
-                v-if="!revealed"
-                type="button"
-                class="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed py-3 text-sm font-bold transition-colors"
-                :style="{borderColor: `${category.accent}66`, color: category.accent}"
-                @click="revealed = true"
+            <p class="mb-2 text-[0.7rem] font-bold tracking-wide text-ink-400">這時候你會怎麼回？選一個 ↓</p>
+            <QuizOptions :question="question" :accent="category.accent" @result="result = $event" />
+            <RouterLink
+                v-if="result"
+                :to="{name: 'QUESTION_DETAIL', params: {questionId: question.id}}"
+                class="mt-2 inline-flex items-center gap-1 text-[0.72rem] font-bold transition-opacity hover:opacity-70"
+                :style="{color: category.accent}"
             >
-                <span class="text-base">🛟</span>點開求生選項
-                <span class="text-[0.64rem] font-medium text-ink-400">（男友不死亡回答）</span>
-            </button>
-
-            <Transition name="reveal">
-                <div v-if="revealed" class="space-y-2">
-                    <!-- BAD END -->
-                    <div class="rounded-2xl border border-heart-200 bg-heart-50 px-3 py-2.5">
-                        <div class="mb-1 flex items-center gap-1.5 text-[0.62rem] font-bold uppercase tracking-wider text-heart-600">
-                            <span>💀</span>BAD END · 別這樣回
-                        </div>
-                        <p class="m-0 text-[0.82rem] leading-relaxed text-heart-700 line-through decoration-heart-300">
-                            {{ question.badEnd }}
-                        </p>
-                    </div>
-                    <!-- 存活 -->
-                    <div class="rounded-2xl border-2 border-mint-300 bg-mint-50 px-3 py-2.5 shadow-puff-sm">
-                        <div class="mb-1 flex items-center gap-1.5 text-[0.62rem] font-bold uppercase tracking-wider text-mint-700">
-                            <span>❤️</span>存活回答
-                        </div>
-                        <p class="m-0 text-[0.9rem] font-semibold leading-relaxed text-ink-800">
-                            {{ question.survival }}
-                        </p>
-                    </div>
-                    <!-- 求生筆記 -->
-                    <p class="flex gap-1.5 px-0.5 pt-0.5 text-[0.72rem] leading-relaxed text-ink-500">
-                        <span class="opacity-70">💡</span><span>{{ question.note }}</span>
-                    </p>
-                    <RouterLink
-                        :to="{name: 'QUESTION_DETAIL', params: {questionId: question.id}}"
-                        class="inline-flex items-center gap-1 pt-0.5 text-[0.72rem] font-bold transition-opacity hover:opacity-70"
-                        :style="{color: category.accent}"
-                    >
-                        看完整詳解 →
-                    </RouterLink>
-                </div>
-            </Transition>
+                看完整詳解 →
+            </RouterLink>
         </div>
     </div>
 </template>
@@ -109,17 +75,25 @@
 import {ref, computed} from 'vue';
 import {categoryMap} from 'maps/common/Category';
 import GirlfriendAvatar from 'components/common/GirlfriendAvatar.vue';
+import QuizOptions from 'components/common/QuizOptions.vue';
 
 export default {
     name: 'QuestionCard',
-    components: {GirlfriendAvatar},
+    components: {GirlfriendAvatar, QuizOptions},
     props: {
         question: {type: Object, required: true},
     },
     setup(props) {
-        const revealed = ref(false);
         const category = computed(() => categoryMap.get(props.question.categoryKey));
-        return {revealed, category};
+        // 作答結果：null（未答）/ 'correct'（存活）/ 'wrong'（BAD END）
+        const result = ref(null);
+        // 答對 → 女友轉甜笑；答錯 → 暴怒；未答 → 依危險度的預設表情
+        const avatarMood = computed(() => {
+            if (result.value === 'correct') return 'sweet';
+            if (result.value === 'wrong') return 'furious';
+            return '';
+        });
+        return {category, result, avatarMood};
     },
 };
 </script>
@@ -138,21 +112,11 @@ export default {
     border-right: 8px solid #FFF7F0; /* cream-100 */
 }
 
-.reveal-enter-active {
-    transition: opacity 280ms ease, transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.reveal-enter-from {
-    opacity: 0;
-    transform: translateY(-6px) scale(0.98);
-}
 .pop-heart-enter-active {
     transition: opacity 300ms ease, transform 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .pop-heart-enter-from {
     opacity: 0;
     transform: scale(0.4) translateY(6px);
-}
-.line-through {
-    text-decoration-line: line-through;
 }
 </style>

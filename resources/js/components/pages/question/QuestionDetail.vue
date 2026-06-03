@@ -39,10 +39,12 @@
             <!-- 場景：頭像 + 對話框 -->
             <div class="relative z-10 mt-6 flex items-end gap-3">
                 <div class="relative shrink-0">
-                    <span class="pointer-events-none absolute -right-1 -top-1 text-lg">💗</span>
+                    <Transition name="pop-heart">
+                        <span v-if="result === 'correct'" class="pointer-events-none absolute -right-1 -top-1 text-lg">💗</span>
+                    </Transition>
                     <GirlfriendAvatar :danger="question.danger"
                                       :accent="category.accent"
-                                      force-mood="sweet"
+                                      :force-mood="avatarMood"
                                       :size="92" />
                 </div>
                 <div class="relative min-w-0 flex-1">
@@ -61,30 +63,13 @@
             </p>
         </section>
 
-        <!-- 選項 -->
-        <section class="mt-5 space-y-3">
-            <div class="rounded-3xl border border-heart-200 bg-heart-50 px-5 py-4">
-                <div class="mb-1.5 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-heart-600">
-                    <span>💀</span>BAD END · 千萬別這樣回
-                </div>
-                <p class="m-0 text-[0.95rem] leading-relaxed text-heart-700 line-through decoration-heart-300">
-                    {{ question.badEnd }}
-                </p>
-            </div>
-            <div class="rounded-3xl border-2 border-mint-300 bg-mint-50 px-5 py-4 shadow-puff-sm">
-                <div class="mb-1.5 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-mint-700">
-                    <span>❤️</span>存活回答
-                </div>
-                <p class="m-0 text-base font-semibold leading-relaxed text-ink-800">
-                    {{ question.survival }}
-                </p>
-            </div>
-            <div class="rounded-3xl border border-sun-200 bg-sun-100/70 px-5 py-4">
-                <div class="mb-1 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-sun-700">
-                    <span>💡</span>求生筆記
-                </div>
-                <p class="m-0 text-sm leading-relaxed text-ink-700">{{ question.note }}</p>
-            </div>
+        <!-- 作答區：選一句你會怎麼回 -->
+        <section class="mt-5">
+            <p class="mb-2.5 font-display text-base font-extrabold text-ink-700">這時候你會怎麼回？選一個 ↓</p>
+            <QuizOptions :key="question.id"
+                         :question="question"
+                         :accent="category.accent"
+                         @result="result = $event" />
         </section>
 
         <!-- 上一題 / 下一題 -->
@@ -122,21 +107,31 @@
 </template>
 
 <script>
-import {computed} from 'vue';
+import {computed, ref, watch} from 'vue';
 import {useRoute} from 'vue-router';
 import {useHead} from '@unhead/vue';
 import {useQuestionStore} from 'stores/question/question';
 import {categoryMap} from 'maps/common/Category';
 import GirlfriendAvatar from 'components/common/GirlfriendAvatar.vue';
+import QuizOptions from 'components/common/QuizOptions.vue';
 
 export default {
     name: 'QuestionDetail',
-    components: {GirlfriendAvatar},
+    components: {GirlfriendAvatar, QuizOptions},
     setup() {
         const route = useRoute();
         const questionStore = useQuestionStore();
 
         const question = computed(() => questionStore.getById(route.params.questionId));
+
+        // 作答結果：null / 'correct' / 'wrong'。切換上下題或隨機抽時要歸零，女友表情才會重置
+        const result = ref(null);
+        watch(() => route.params.questionId, () => { result.value = null; });
+        const avatarMood = computed(() => {
+            if (result.value === 'correct') return 'sweet';
+            if (result.value === 'wrong') return 'furious';
+            return '';
+        });
         const category = computed(() => (question.value ? categoryMap.get(question.value.categoryKey) : categoryMap.get('APPEARANCE')));
 
         const index = computed(() => questionStore.list.findIndex((q) => q.id === Number(route.params.questionId)));
@@ -152,7 +147,7 @@ export default {
             };
         }));
 
-        return {question, category, prev, next};
+        return {question, category, prev, next, result, avatarMood};
     },
 };
 </script>
@@ -169,7 +164,11 @@ export default {
     border-bottom: 7px solid transparent;
     border-right: 8px solid #FFF7F0;
 }
-.line-through {
-    text-decoration-line: line-through;
+.pop-heart-enter-active {
+    transition: opacity 300ms ease, transform 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.pop-heart-enter-from {
+    opacity: 0;
+    transform: scale(0.4) translateY(6px);
 }
 </style>
