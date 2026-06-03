@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0" stop-color="#FFF6FB"/>
+            <stop offset="0.5" stop-color="#FFEAF3"/>
+            <stop offset="1" stop-color="#F4F0FF"/>
+        </linearGradient>
+        <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F0479B"/>
+            <stop offset="0.55" stop-color="#C9367C"/>
+            <stop offset="1" stop-color="#9C2A60"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="1200" height="630" fill="url(#sky)"/>
+
+    <!-- 柔光暈 -->
+    <circle cx="120" cy="90" r="220" fill="#FFB8DC" opacity="0.40"/>
+    <circle cx="1090" cy="120" r="240" fill="#CDBCFF" opacity="0.35"/>
+    <circle cx="980" cy="560" r="200" fill="#FFC1DE" opacity="0.35"/>
+
+    <!-- 標題 -->
+    <text x="600" y="135" text-anchor="middle" font-family="'Baloo 2','M PLUS Rounded 1c','Noto Sans TC',sans-serif"
+          font-size="96" font-weight="800" fill="url(#grad)">女友送命題圖鑑</text>
+    <text x="600" y="186" text-anchor="middle" font-family="'JetBrains Mono',monospace"
+          font-size="26" letter-spacing="8" fill="#9488B5">GIRLFRIEND DEATH QUESTIONS</text>
+
+    <!-- 場景：暴怒女友頭像 -->
+    <g transform="translate(150,300) scale(1.7)">
+        <circle cx="50" cy="50" r="48" fill="#F0479B" opacity="0.14"/>
+        <path d="M16 52 C16 26 32 14 50 14 C68 14 84 26 84 52 C84 64 80 74 80 74 L20 74 C20 74 16 64 16 52 Z" fill="#5B4636"/>
+        <circle cx="50" cy="52" r="30" fill="#FFE6D2"/>
+        <path d="M22 44 C24 28 38 20 50 20 C62 20 76 28 78 44 C70 38 60 36 50 40 C40 36 30 38 22 44 Z" fill="#5B4636"/>
+        <ellipse cx="34" cy="58" rx="5.5" ry="3.4" fill="#FF8FB0" opacity="0.85"/>
+        <ellipse cx="66" cy="58" rx="5.5" ry="3.4" fill="#FF8FB0" opacity="0.85"/>
+        <path d="M35 41 q5 2 9 4.5" fill="none" stroke="#3E3559" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M56 45.5 q4 -2 9 -4.5" fill="none" stroke="#3E3559" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M36 53 q4 -3 8 -0.5" fill="none" stroke="#3E3559" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M56 52.5 q4 -2.5 8 0.5" fill="none" stroke="#3E3559" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M43 70 q7 -6 14 0" fill="#C9367C" stroke="#3E3559" stroke-width="2.2" stroke-linejoin="round"/>
+        <g stroke="#F0479B" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M74 26 l6 0 M77 23 l0 6 M72 30 l4 4 M80 30 l-4 4"/>
+        </g>
+    </g>
+
+    <!-- 名牌 -->
+    <g transform="translate(430,250)">
+        <rect x="0" y="0" width="86" height="40" rx="9" fill="#C9367C"/>
+        <text x="43" y="28" text-anchor="middle" font-family="'M PLUS Rounded 1c','Noto Sans TC',sans-serif"
+              font-size="24" font-weight="800" fill="#FFFFFF">女友</text>
+    </g>
+
+    <!-- 對話框 -->
+    <g transform="translate(430,300)">
+        <path d="M30 0 H700 a26 26 0 0 1 26 26 V150 a26 26 0 0 1 -26 26 H70 L40 206 V176 H26 a26 26 0 0 1 -26 -26 V26 a26 26 0 0 1 26 -26 Z"
+              fill="#FFFDF8" stroke="#E4D9EC" stroke-width="2"/>
+        <text x="60" y="90" font-family="'M PLUS Rounded 1c','Noto Sans TC',sans-serif"
+              font-size="58" font-weight="800" fill="#2C2640">「我跟你媽掉水裡，</text>
+        <text x="120" y="158" font-family="'M PLUS Rounded 1c','Noto Sans TC',sans-serif"
+              font-size="58" font-weight="800" fill="#2C2640">你先救誰？」</text>
+    </g>
+
+    <!-- 底部標語 -->
+    <text x="600" y="590" text-anchor="middle" font-family="'Noto Sans TC',sans-serif"
+          font-size="30" font-weight="500" fill="#6E6191">30 道送命題 · 附吐槽與「男友不死亡回答」· 點開選項全身而退</text>
+</svg>

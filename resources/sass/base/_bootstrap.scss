@@ -1,0 +1,49 @@
+@use 'reset-css/reset.css';
+@use 'normalize';
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
+
+@tailwind utilities;
+
+html, body {
+    font-family: 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: theme('colors.ink.800');
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    // 棉花糖夢境天空：奶油底 + 粉/紫/藍多層柔光暈，像雲海
+    background-color: theme('colors.cream.200');
+    background-image:
+        radial-gradient(circle at 12% 8%, rgba(255, 143, 200, 0.30) 0%, transparent 42%),
+        radial-gradient(circle at 88% 14%, rgba(166, 219, 255, 0.34) 0%, transparent 46%),
+        radial-gradient(circle at 78% 82%, rgba(180, 154, 255, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 18% 92%, rgba(255, 216, 236, 0.40) 0%, transparent 48%),
+        linear-gradient(180deg, #FFF6FB 0%, #F4F0FF 45%, #EAF7FF 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+::selection {
+    background: theme('colors.candy.300');
+    color: theme('colors.ink.900');
+}
+
+// 卷軸也走糖果色（webkit）
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-thumb {
+    background: theme('colors.lilac.300');
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.candy.400');
+    background-clip: content-box;
+}
