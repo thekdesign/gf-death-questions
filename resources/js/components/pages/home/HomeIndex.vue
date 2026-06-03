@@ -26,6 +26,19 @@
                     <span class="text-xs text-ink-500">{{ stat.label }}</span>
                 </div>
             </div>
+
+            <!-- 隨機抽一題 -->
+            <div class="mt-5">
+                <button
+                    type="button"
+                    class="group inline-flex items-center gap-2 rounded-full px-6 py-3 font-display text-base font-extrabold text-white shadow-candy transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                    style="background-image: linear-gradient(135deg, #FF8FC8, #C9367C);"
+                    @click="pickRandom"
+                >
+                    <span class="text-lg transition-transform group-hover:rotate-[20deg] group-active:rotate-[360deg]">🎲</span>
+                    隨機抽一題
+                </button>
+            </div>
         </header>
 
         <!-- 分類膠囊 -->
@@ -120,6 +133,7 @@
 
 <script>
 import {computed} from 'vue';
+import {useRouter} from 'vue-router';
 import {useHead} from '@unhead/vue';
 import {useQuestionStore} from 'stores/question/question';
 import {useFiltersStore} from 'stores/ui/filters';
@@ -130,6 +144,7 @@ export default {
     name: 'HomeIndex',
     components: {QuestionCard},
     setup() {
+        const router = useRouter();
         const questionStore = useQuestionStore();
         const filtersStore = useFiltersStore();
 
@@ -161,6 +176,14 @@ export default {
 
         const matchCount = computed(() => questionStore.list.filter((q) => matchesSearch(q) && matchesDanger(q)).length);
 
+        // 隨機抽一題 → 跳到該題詳解。Math.random 只在點擊時跑（client-side），不影響 SSG prerender
+        const pickRandom = () => {
+            const list = questionStore.list;
+            if (!list.length) return;
+            const target = list[Math.floor(Math.random() * list.length)];
+            router.push({name: 'QUESTION_DETAIL', params: {questionId: target.id}});
+        };
+
         const displayCategories = computed(() => {
             const filtered = questionStore.list.filter((q) => matchesSearch(q) && matchesDanger(q));
             const grouped = filtered.reduce((acc, q) => {
@@ -173,7 +196,7 @@ export default {
                 .filter((c) => c.questions.length > 0);
         });
 
-        return {filtersStore, categoryList, dangerLevels, stats, matchCount, displayCategories};
+        return {filtersStore, categoryList, dangerLevels, stats, matchCount, displayCategories, pickRandom};
     },
 };
 </script>
