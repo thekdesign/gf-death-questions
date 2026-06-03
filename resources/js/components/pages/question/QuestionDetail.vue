@@ -92,9 +92,9 @@
             <RouterLink
                 v-if="prev"
                 :to="{name: 'QUESTION_DETAIL', params: {questionId: prev.id}}"
-                class="group flex flex-1 items-center gap-2.5 rounded-3xl border border-white/70 bg-white/65 px-4 py-3 text-left shadow-puff-sm backdrop-blur transition-shadow hover:shadow-puff"
+                class="group flex min-w-0 flex-1 items-center gap-2.5 rounded-3xl border border-white/70 bg-white/65 px-4 py-3 text-left shadow-puff-sm backdrop-blur transition-shadow hover:shadow-puff"
             >
-                <span class="text-xl leading-none">←</span>
+                <span class="shrink-0 text-xl leading-none">←</span>
                 <span class="min-w-0">
                     <span class="block text-[0.62rem] uppercase tracking-wide text-ink-400">上一題</span>
                     <span class="block truncate font-display text-sm font-bold text-ink-700">{{ prev.question }}</span>
@@ -103,13 +103,13 @@
             <RouterLink
                 v-if="next"
                 :to="{name: 'QUESTION_DETAIL', params: {questionId: next.id}}"
-                class="group flex flex-1 items-center justify-end gap-2.5 rounded-3xl border border-white/70 bg-white/65 px-4 py-3 text-right shadow-puff-sm backdrop-blur transition-shadow hover:shadow-puff"
+                class="group flex min-w-0 flex-1 items-center justify-end gap-2.5 rounded-3xl border border-white/70 bg-white/65 px-4 py-3 text-right shadow-puff-sm backdrop-blur transition-shadow hover:shadow-puff"
             >
                 <span class="min-w-0">
                     <span class="block text-[0.62rem] uppercase tracking-wide text-ink-400">下一題</span>
                     <span class="block truncate font-display text-sm font-bold text-ink-700">{{ next.question }}</span>
                 </span>
-                <span class="text-xl leading-none">→</span>
+                <span class="shrink-0 text-xl leading-none">→</span>
             </RouterLink>
         </nav>
     </div>
