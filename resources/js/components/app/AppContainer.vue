@@ -52,7 +52,13 @@
         <!-- Footer -->
         <footer class="px-4 py-8 text-center">
             <div class="mx-auto max-w-xl space-y-2.5">
-                <div class="text-xl">💣 💗 🛟</div>
+                <div class="text-xl">
+                    <RouterLink :to="{name: 'BOSS_QUESTION'}"
+                                class="no-underline"
+                                title="？"
+                                aria-label="隱藏魔王題">💣</RouterLink>
+                    💗 🛟
+                </div>
                 <p class="mx-auto max-w-md text-xs leading-relaxed text-ink-500">
                     本站語錄整理自 PTT、Dcard、Threads、FB 兩性社團的「送命題」迷因，<strong class="text-ink-700">純屬娛樂與二創</strong>。
                     每個人的女友不一樣，求生回答請斟酌服用、誠意才是唯一正解。
