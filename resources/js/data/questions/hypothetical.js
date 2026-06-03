@@ -60,4 +60,15 @@ export const hypothetical = [
         survival: '我不會選邊，我會站在你們中間當翻譯，把彼此的好意翻給對方聽。',
         note: '不選邊、也不否認衝突會發生，把自己定位成「橋樑」而非「裁判」。',
     },
+    {
+        id: 36,
+        number: '36',
+        categoryKey: 'HYPOTHETICAL',
+        question: '如果我變得超級黏你，你會覺得煩嗎？',
+        danger: 3,
+        roast: '答「不會」她嫌敷衍，答「會」你今晚就睡沙發。',
+        badEnd: '應該還好吧，適度就好啦。',
+        survival: '妳想黏就黏，我巴不得妳離不開我。',
+        note: '把「黏」重新定義成「我求之不得」，化被動為主動。',
+    },
 ];

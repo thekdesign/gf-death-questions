@@ -78,7 +78,7 @@
             class="mx-auto mt-7 block w-fit rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-candy transition-transform hover:-translate-y-0.5"
             style="background-image: linear-gradient(135deg, #FF8FC8, #C9367C);"
         >
-            回去乖乖練習 30 道送命題 →
+            回去乖乖練習 40 道送命題 →
         </RouterLink>
     </div>
 </template>

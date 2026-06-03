@@ -54,8 +54,8 @@
             <div class="mx-auto max-w-xl space-y-2.5">
                 <div class="text-xl">
                     <RouterLink :to="{name: 'BOSS_QUESTION'}"
-                                class="no-underline"
-                                title="？"
+                                class="boss-hint inline-block no-underline"
+                                title="點我？你確定？"
                                 aria-label="隱藏魔王題">💣</RouterLink>
                     💗 🛟
                 </div>
@@ -65,6 +65,9 @@
                 </p>
                 <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-ink-300">
                     Girlfriend Death Questions · Survive at your own risk · est. 2026
+                </p>
+                <p class="text-[0.66rem] leading-relaxed text-ink-300">
+                    👀 據說還有一道<strong class="text-heart-400">沒有答案的魔王題</strong>，就藏在這頁的某個角落……
                 </p>
             </div>
         </footer>
@@ -95,5 +98,14 @@ export default {
 .route-fade-leave-to {
     opacity: 0;
     transform: translateY(-6px);
+}
+
+/* footer 的 💣 彩蛋線索：游標變手指 + hover 微微脹大顫動 */
+.boss-hint {
+    cursor: pointer;
+    transition: transform 180ms ease;
+}
+.boss-hint:hover {
+    transform: scale(1.25) rotate(-6deg);
 }
 </style>
