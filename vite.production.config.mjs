@@ -32,12 +32,13 @@ export default mergeConfig(common, {
     ssgOptions: {
         script: 'async',
         formatting: 'minify',
-        // 顯式列出所有要 prerender 的 routes：首頁 + 404 + 隱藏魔王題 + 所有 /q/:id
+        // 顯式列出所有要 prerender 的 routes：首頁 + 404 + 測驗 + 隱藏魔王題 + 所有 /q/:id
         async includedRoutes() {
             const {questions} = await import('./resources/js/data/questions.js');
             return [
                 '/',
                 '/404',
+                '/quiz', // 10 題生存測驗
                 '/boss', // 隱藏魔王題彩蛋：要 prerender（直接開不 404），但刻意不進 sitemap
                 ...questions.map((q) => `/q/${q.id}`),
             ];
@@ -51,6 +52,7 @@ export default mergeConfig(common, {
 
             const urls = [
                 {loc: '/', priority: '1.0', changefreq: 'weekly'},
+                {loc: '/quiz', priority: '0.9', changefreq: 'monthly'},
                 ...questions.map((q) => ({
                     loc: `/q/${q.id}`,
                     priority: '0.8',

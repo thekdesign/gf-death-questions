@@ -8,6 +8,12 @@ export const pageRouteMap = new EnumMap(PageRoute, {
         component: () => import('components/pages/question/QuestionDetail.vue'),
         meta: {title: '送命題'},
     },
+    // 10 題生存測驗
+    QUIZ_TEST: {
+        path: 'quiz',
+        component: () => import('components/pages/quiz/QuizTest.vue'),
+        meta: {title: '10 題測驗'},
+    },
     // 隱藏魔王題（彩蛋）：footer 的 💣 進入
     BOSS_QUESTION: {
         path: 'boss',

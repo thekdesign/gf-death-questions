@@ -27,12 +27,18 @@
                 </div>
             </div>
 
-            <!-- 隨機抽一題 -->
-            <div class="mt-5">
+            <!-- 玩法入口：測驗 + 隨機抽 -->
+            <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+                <RouterLink
+                    :to="{name: 'QUIZ_TEST'}"
+                    class="inline-flex items-center gap-2 rounded-full px-6 py-3 font-display text-base font-extrabold text-white shadow-candy transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                    style="background-image: linear-gradient(135deg, #FF8FC8, #C9367C);"
+                >
+                    <span class="text-lg">📝</span>來場 10 題測驗
+                </RouterLink>
                 <button
                     type="button"
-                    class="group inline-flex items-center gap-2 rounded-full px-6 py-3 font-display text-base font-extrabold text-white shadow-candy transition-transform hover:-translate-y-0.5 active:translate-y-0"
-                    style="background-image: linear-gradient(135deg, #FF8FC8, #C9367C);"
+                    class="group inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/70 px-6 py-3 font-display text-base font-extrabold text-ink-600 shadow-puff-sm backdrop-blur transition-transform hover:-translate-y-0.5 active:translate-y-0"
                     @click="pickRandom"
                 >
                     <span class="text-lg transition-transform group-hover:rotate-[20deg] group-active:rotate-[360deg]">🎲</span>

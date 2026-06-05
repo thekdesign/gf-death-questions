@@ -32,6 +32,7 @@
                     <span class="opacity-70">💡</span><span>{{ question.note }}</span>
                 </p>
                 <button
+                    v-if="allowReset"
                     type="button"
                     class="mt-1 inline-flex items-center gap-1 text-[0.72rem] font-bold text-ink-400 transition-colors hover:text-ink-700"
                     @click="reset"
@@ -53,6 +54,8 @@ export default {
     props: {
         question: {type: Object, required: true},
         accent: {type: String, default: '#F0479B'},
+        // 測驗模式關掉「重答」，避免作答後改答案影響分數
+        allowReset: {type: Boolean, default: true},
     },
     emits: ['result'],
     setup(props, {emit}) {
